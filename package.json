@@ -1,0 +1,22 @@
+{
+  "name": "premium-desk-worker-astro",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Premium Desk Worker Landing Page - Astro Edition",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.3.4",
+    "@types/node": "^20.10.5",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@astrojs/tailwind": "^5.1.5",
+    "astro": "^4.5.6"
+  }
+}

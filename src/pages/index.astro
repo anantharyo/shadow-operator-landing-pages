@@ -1,0 +1,308 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../config/site';
+---
+
+<BaseLayout 
+  title={siteConfig.name}
+  description={siteConfig.description}
+>
+  <!-- Hero Section -->
+  <section class="min-h-screen flex items-center justify-center relative overflow-hidden gradient-mesh">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-luxury-accent rounded-full blur-3xl"></div>
+      <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-luxury-accent rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 py-20 text-center relative z-10">
+      <!-- Badge -->
+      <div class="inline-block glass px-4 py-2 rounded-full mb-8">
+        <span class="text-luxury-accent font-medium mono-text">{siteConfig.hero.badge}</span>
+      </div>
+
+      <!-- Main Title -->
+      <h1 class="display-text mb-6">{siteConfig.hero.title}</h1>
+
+      <!-- Subtitle -->
+      <p class="subheading-text text-luxury-text-muted max-w-3xl mx-auto mb-8">
+        {siteConfig.hero.subtitle}
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a 
+          href={siteConfig.hero.cta.primary.href}
+          class="bg-luxury-accent hover:bg-luxury-accent-hover text-luxury-bg px-8 py-4 rounded-lg font-medium text-lg transition-all transform hover:scale-105"
+        >
+          {siteConfig.hero.cta.primary.label}
+        </a>
+        
+        <a 
+          href={siteConfig.hero.cta.secondary.href}
+          class="glass border border-luxury-border hover:border-luxury-accent text-luxury-text px-8 py-4 rounded-lg font-medium text-lg transition-all"
+        >
+          {siteConfig.hero.cta.secondary.label}
+        </a>
+      </div>
+
+      <!-- Social Proof -->
+      <div class="mt-12">
+        <p class="text-luxury-text-muted mb-4 mono-text">Trusted by 500+ entrepreneurs</p>
+        <div class="flex justify-center items-center space-x-6 opacity-60">
+          <span class="text-xl">🚀</span>
+          <span class="text-xl">💼</span>
+          <span class="text-xl">⚡</span>
+          <span class="text-xl">🎯</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="py-20 bg-luxury-surface">
+    <div class="max-w-7xl mx-auto px-6">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <h2 class="heading-text mb-4">Premium Services</h2>
+        <p class="subheading-text text-luxury-text-muted max-w-3xl mx-auto">
+          Comprehensive virtual assistance solutions designed for high-growth entrepreneurs
+        </p>
+      </div>
+
+      <!-- Services Grid -->
+      <div class="grid md:grid-cols-3 gap-8">
+        {siteConfig.services.map((service) => (
+          <div class="glass p-8 rounded-2xl border border-luxury-border hover:border-luxury-accent transition-all duration-300 hover:transform hover:scale-105">
+            <!-- Service Icon -->
+            <div class="text-4xl mb-4">{service.icon}</div>
+            
+            <!-- Service Title -->
+            <h3 class="subheading-text mb-3">{service.title}</h3>
+            
+            <!-- Service Description -->
+            <p class="body-text text-luxury-text-muted mb-6">{service.description}</p>
+            
+            <!-- Features List -->
+            <ul class="space-y-2">
+              {service.features.map((feature) => (
+                <li class="flex items-center text-sm text-luxury-text-muted">
+                  <svg class="w-4 h-4 text-luxury-accent mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="py-20 bg-luxury-bg">
+    <div class="max-w-7xl mx-auto px-6">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <h2 class="heading-text mb-4">Simple, Transparent Pricing</h2>
+        <p class="subheading-text text-luxury-text-muted max-w-3xl mx-auto">
+          Choose the plan that matches your business needs. All plans include premium support and dedicated onboarding.
+        </p>
+      </div>
+
+      <!-- Pricing Cards -->
+      <div class="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {siteConfig.pricing.map((plan) => (
+          <div class={`relative glass p-8 rounded-2xl border transition-all duration-300 ${
+            plan.popular 
+              ? 'border-luxury-accent scale-105 shadow-2xl' 
+              : 'border-luxury-border hover:border-luxury-accent'
+          }`}>
+            {/* Popular Badge */}
+            {plan.popular && (
+              <div class="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                <span class="bg-luxury-accent text-luxury-bg px-4 py-1 rounded-full text-sm font-medium mono-text">
+                  Most Popular
+                </span>
+              </div>
+            )}
+
+            {/* Plan Name */}
+            <h3 class="subheading-text mb-2">{plan.name}</h3>
+            
+            {/* Price */}
+            <div class="mb-4">
+              <span class="display-text text-4xl">{plan.price}</span>
+              <span class="text-luxury-text-muted">{plan.period}</span>
+            </div>
+            
+            {/* Description */}
+            <p class="body-text text-luxury-text-muted mb-6">{plan.description}</p>
+            
+            {/* Features */}
+            <ul class="space-y-3 mb-8">
+              {plan.features.map((feature) => (
+                <li class="flex items-center">
+                  <svg class="w-5 h-5 text-luxury-accent mr-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                  <span class="text-luxury-text">{feature}</span>
+                </li>
+              ))}
+            </ul>
+            
+            {/* CTA Button */}
+            <a 
+              href={plan.cta.href}
+              class={`block text-center py-3 px-6 rounded-lg font-medium transition-all ${
+                plan.popular
+                  ? 'bg-luxury-accent hover:bg-luxury-accent-hover text-luxury-bg'
+                  : 'glass border border-luxury-border hover:border-luxury-accent text-luxury-text'
+              }`}
+            >
+              {plan.cta.label}
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="py-20 bg-luxury-surface">
+    <div class="max-w-7xl mx-auto px-6">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <h2 class="heading-text mb-4">Trusted by Entrepreneurs</h2>
+        <p class="subheading-text text-luxury-text-muted max-w-3xl mx-auto">
+          See what our clients say about the impact Premium Desk Worker has made on their businesses
+        </p>
+      </div>
+
+      <!-- Testimonials Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {siteConfig.testimonials.map((testimonial) => (
+          <div class="glass p-8 rounded-2xl border border-luxury-border hover:border-luxury-accent transition-all duration-300">
+            {/* Quote */}
+            <blockquote class="mb-6">
+              <p class="body-text italic text-luxury-text">"{testimonial.quote}"</p>
+            </blockquote>
+            
+            {/* Author Info */}
+            <div class="flex items-center">
+              {/* Avatar */}
+              <div class="w-12 h-12 rounded-full bg-luxury-surface-raised flex items-center justify-center text-2xl mr-4">
+                {testimonial.avatar}
+              </div>
+              
+              {/* Author Details */}
+              <div>
+                <p class="font-medium text-luxury-text">{testimonial.author}</p>
+                <p class="text-sm text-luxury-text-muted">{testimonial.company}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="py-20 bg-luxury-bg">
+    <div class="max-w-4xl mx-auto px-6">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <h2 class="heading-text mb-4">Frequently Asked Questions</h2>
+        <p class="subheading-text text-luxury-text-muted">
+          Everything you need to know about Premium Desk Worker
+        </p>
+      </div>
+
+      <!-- FAQ Items -->
+      <div class="space-y-6">
+        {siteConfig.faq.map((faqItem) => (
+          <details class="glass p-6 rounded-2xl border border-luxury-border hover:border-luxury-accent transition-all duration-300">
+            <summary class="cursor-pointer flex justify-between items-center">
+              <h3 class="subheading-text text-left pr-8">{faqItem.question}</h3>
+              <svg class="w-5 h-5 text-luxury-text-muted transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="mt-4 pt-4 border-t border-luxury-border">
+              <p class="body-text text-luxury-text-muted">{faqItem.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 bg-luxury-surface">
+    <div class="max-w-4xl mx-auto px-6">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <h2 class="heading-text mb-4">Ready to Scale Your Business?</h2>
+        <p class="subheading-text text-luxury-text-muted">
+          Book a discovery call to see how Premium Desk Worker can transform your workflow
+        </p>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="glass p-8 rounded-2xl border border-luxury-border">
+        <form class="space-y-6" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <!-- Name -->
+          <div>
+            <label for="name" class="block text-sm font-medium text-luxury-text mb-2">Full Name</label>
+            <input 
+              type="text" 
+              id="name" 
+              name="name" 
+              required
+              class="w-full px-4 py-3 bg-luxury-surface-raised border border-luxury-border rounded-lg text-luxury-text placeholder-luxury-text-muted focus:outline-none focus:border-luxury-accent transition-colors"
+              placeholder="Enter your full name"
+            />
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label for="email" class="block text-sm font-medium text-luxury-text mb-2">Email Address</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              required
+              class="w-full px-4 py-3 bg-luxury-surface-raised border border-luxury-border rounded-lg text-luxury-text placeholder-luxury-text-muted focus:outline-none focus:border-luxury-accent transition-colors"
+              placeholder="your@email.com"
+            />
+          </div>
+
+          <!-- Message -->
+          <div>
+            <label for="message" class="block text-sm font-medium text-luxury-text mb-2">What are you looking to achieve?</label>
+            <textarea 
+              id="message" 
+              name="message" 
+              rows="4"
+              class="w-full px-4 py-3 bg-luxury-surface-raised border border-luxury-border rounded-lg text-luxury-text placeholder-luxury-text-muted focus:outline-none focus:border-luxury-accent transition-colors resize-none"
+              placeholder="Tell us about your current workflow and what you'd like to improve..."
+            ></textarea>
+          </div>
+
+          <!-- Submit Button -->
+          <button 
+            type="submit"
+            class="w-full bg-luxury-accent hover:bg-luxury-accent-hover text-luxury-bg py-4 px-6 rounded-lg font-medium text-lg transition-all transform hover:scale-105"
+          >
+            Book Discovery Call
+          </button>
+
+          <!-- Privacy Notice -->
+          <p class="text-xs text-luxury-text-muted text-center">
+            We respect your privacy. Your information will never be shared with third parties.
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
